@@ -1,0 +1,31 @@
+{
+  "name": "rbuild",
+  "version": "1.0.0",
+  "description": "build tool",
+  "main": "index.js",
+  "bin": {
+    "rbuild": "./bin/rbuild.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "build",
+    "tool",
+    "webpack",
+    "gulp"
+  ],
+  "author": "vfasky@gmail.com",
+  "license": "BSD",
+  "dependencies": {
+    "fs-plus": "^2.8.1",
+    "gulp": "^3.9.0",
+    "gulp-watch": "^4.3.5",
+    "html-minifier": "^1.0.0",
+    "lodash": "^3.10.1",
+    "minimist": "^1.2.0",
+    "request": "^2.65.0",
+    "through2": "^2.0.0",
+    "webpack": "^1.12.4"
+  }
+}
