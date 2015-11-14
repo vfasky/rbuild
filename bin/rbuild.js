@@ -26,7 +26,7 @@ if (options._.indexOf('init') !== -1) {
   deployConfig = fs.readFileSync(path.join(__dirname, '../tpl/rbuild.deploy.js'), 'utf8').replace('#{webpackPath}', path.join(__dirname, '../node_modules/webpack/lib/webpack.js'));
   outFile = path.join(process.cwd(), 'rbuild.deploy.js');
   fs.writeFileSync(outFile, deployConfig, 'utf8');
-  gitignore = fs.readFileSync(path.join(__dirname, '../tpl/.gitignore'), 'utf8');
+  gitignore = fs.readFileSync(path.join(__dirname, '../tpl/_gitignore'), 'utf8');
   fs.writeFileSync(path.join(process.cwd(), '.gitignore', gitignore, 'utf8'));
   console.log('init done');
   process.exit(1);

@@ -37,7 +37,7 @@ if options._.indexOf('init') != -1
     fs.writeFileSync outFile, deployConfig, 'utf8'
 
     gitignore = fs.readFileSync(
-        path.join(__dirname, '../tpl/.gitignore'),
+        path.join(__dirname, '../tpl/_gitignore'),
         'utf8'
     )
 
