@@ -1,0 +1,5 @@
+*.swp
+node_modules
+.rbuildData
+.DS_Store
+rbuild.deploy.js

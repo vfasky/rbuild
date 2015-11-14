@@ -15,6 +15,42 @@ options = _.extend
     config: 'rbuild.config.js'
 , argv
 
+# init
+if options._.indexOf('init') != -1
+    devConfig = fs.readFileSync(
+        path.join(__dirname, '../tpl/rbuild.config.js'),
+        'utf8'
+    )
+
+    outFile = path.join process.cwd(), 'rbuild.config.js'
+    fs.writeFileSync outFile, devConfig, 'utf8'
+
+    deployConfig = fs.readFileSync(
+        path.join(__dirname, '../tpl/rbuild.deploy.js'),
+        'utf8'
+    ).replace(
+        '#{webpackPath}',
+        path.join __dirname, '../node_modules/webpack/lib/webpack.js'
+    )
+
+    outFile = path.join process.cwd(), 'rbuild.deploy.js'
+    fs.writeFileSync outFile, deployConfig, 'utf8'
+
+    gitignore = fs.readFileSync(
+        path.join(__dirname, '../tpl/.gitignore'),
+        'utf8'
+    )
+
+    fs.writeFileSync(
+        path.join process.cwd(), '.gitignore',
+        gitignore,
+        'utf8'
+    )
+
+    console.log 'init done'
+    process.exit(1)
+
+
 # load config
 config = require('../config') require path.join process.cwd(), options.config
 
@@ -29,6 +65,7 @@ if options._.indexOf('watch') != -1
     ],{
         cwd: __dirname
     }
+
 
 # 更新cdnjs包
 if options._.indexOf('updatePack') != -1
