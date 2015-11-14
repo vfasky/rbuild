@@ -4,6 +4,7 @@ var config = require('./rbuild.config');
 var webpack = require('#{webpackPath}');
 
 // min js
+config.webpackConfig.plugins = config.webpackConfig.plugins || [];
 config.webpackConfig.plugins.push(new webpack.optimize.UglifyJsPlugin({
   compress: {
     warnings: false
