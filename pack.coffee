@@ -11,6 +11,8 @@ config = require('./config')()
 util = require './util'
 _ = require 'lodash'
 
+_writeConfigTime = false
+
 init = ->
     packMapFile = config.packMapFile
     
@@ -23,7 +25,15 @@ exports.getData = ->
     packMapFile = config.packMapFile
     JSON.parse fs.readFileSync packMapFile, 'utf8'
 
+
 exports.writeConfig = (data)->
+    clearTimeout _writeConfigTime if _writeConfigTime
+
+    _writeConfigTime = setTimeout ->
+        exports._writeConfig data
+    , 100
+
+exports._writeConfig = (data)->
     paths = {}
     packNames = Object.keys data
 

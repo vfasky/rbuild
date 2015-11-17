@@ -7,7 +7,7 @@
  * @link http://vfasky.com
  * @version $Id$
  */
-var _, config, fs, init, path, util;
+var _, _writeConfigTime, config, fs, init, path, util;
 
 path = require('path');
 
@@ -18,6 +18,8 @@ config = require('./config')();
 util = require('./util');
 
 _ = require('lodash');
+
+_writeConfigTime = false;
 
 init = function() {
   var packMapFile;
@@ -35,6 +37,15 @@ exports.getData = function() {
 };
 
 exports.writeConfig = function(data) {
+  if (_writeConfigTime) {
+    clearTimeout(_writeConfigTime);
+  }
+  return _writeConfigTime = setTimeout(function() {
+    return exports._writeConfig(data);
+  }, 100);
+};
+
+exports._writeConfig = function(data) {
   var AMDCfg, cfgFile, cfgFileName, chunkhash, packNames, paths, soure;
   paths = {};
   packNames = Object.keys(data);
