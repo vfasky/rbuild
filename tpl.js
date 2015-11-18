@@ -7,7 +7,7 @@
  * @link http://vfasky.com
  * @version $Id$
  */
-var buildAMDPack, buildTpl, config, fs, minify, pack, path, through2, tplDataCache, util;
+var _writeFileTime, buildAMDPack, buildTpl, config, fs, minify, pack, path, through2, tplDataCache, util, writeFile;
 
 through2 = require('through2');
 
@@ -64,10 +64,21 @@ buildTpl = function(file, enc, done) {
   chunkhash = util.md5(soure).substring(0, config.hashLen);
   tplFileName = config.tpl.filename.replace(/\[name\]/g, tplName).replace(/\[chunkhash\]/g, chunkhash);
   tplFile = path.join(config.tpl.output, tplFileName);
-  fs.writeFileSync(tplFile, soure, 'utf8');
   packData = pack.reg(tplPack, tplFile);
-  console.log("build tpl pack: " + tplPack + " [success]");
+  writeFile(tplFile, soure);
   return done(null, file);
+};
+
+_writeFileTime = {};
+
+writeFile = function(file, data) {
+  if (_writeFileTime[file]) {
+    clearTimeout(_writeFileTime[file]);
+  }
+  return _writeFileTime[file] = setTimeout(function() {
+    fs.writeFileSync(file, data, 'utf8');
+    return console.log("build tpl pack: " + file + " [success]");
+  }, 500);
 };
 
 module.exports = function() {

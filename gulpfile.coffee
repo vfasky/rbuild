@@ -44,7 +44,8 @@ packKeys.forEach (v)->
 gulp.task 'webpack', ->
     webpack cfg.webpackConfig, (err, stats)->
         throw new gutil.PluginError 'webpack', err if err
-        console.log 'webpack run'
+        gutil.log '[webpack]', stats.toString
+            colors: true
 
 
 gulp.task 'buildTpl', ->
@@ -60,8 +61,8 @@ gulp.task 'watch', ['buildTpl', 'webpack'], (done)->
     watch cfg.webpackConfig.watchFile, ->
         webpack cfg.webpackConfig, (err, stats)->
             throw new gutil.PluginError 'webpack', err if err
-            console.log 'webpack run'
 
+            gutil.log '[webpack]', stats.toString()
 
 
     

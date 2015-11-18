@@ -60,13 +60,25 @@ buildTpl = (file, enc, done)->
 
     tplFile = path.join config.tpl.output, tplFileName
 
-    fs.writeFileSync tplFile, soure, 'utf8'
+    #fs.writeFileSync tplFile, soure, 'utf8'
 
     packData = pack.reg tplPack, tplFile
 
-    console.log "build tpl pack: #{tplPack} [success]"
+    writeFile tplFile, soure
+
+    #console.log "build tpl pack: #{tplPack} [success]"
 
     done null, file
+
+_writeFileTime = {}
+writeFile = (file, data)->
+    if _writeFileTime[file]
+        clearTimeout _writeFileTime[file]
+
+    _writeFileTime[file] = setTimeout ->
+        fs.writeFileSync file, data, 'utf8'
+        console.log "build tpl pack: #{file} [success]"
+    , 500
 
 
 # test

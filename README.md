@@ -34,7 +34,7 @@ rbuild watch
 
 #### deploy
 ```
-rbuild --config rbuild.deploy.js
+rbuild watch --config rbuild.deploy.js
 ```
 
 ### 配置文件

@@ -55,7 +55,9 @@ gulp.task('webpack', function() {
     if (err) {
       throw new gutil.PluginError('webpack', err);
     }
-    return console.log('webpack run');
+    return gutil.log('[webpack]', stats.toString({
+      colors: true
+    }));
   });
 });
 
@@ -72,7 +74,7 @@ gulp.task('watch', ['buildTpl', 'webpack'], function(done) {
       if (err) {
         throw new gutil.PluginError('webpack', err);
       }
-      return console.log('webpack run');
+      return gutil.log('[webpack]', stats.toString());
     });
   });
 });

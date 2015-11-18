@@ -7,7 +7,7 @@ path = require 'path'
 argv = require('minimist') process.argv.slice(2)
 spawn = require('child_process').spawn
 fs = require 'fs-plus'
-
+gutil = require 'gulp-util'
 
 process.env.INIT_CWD = process.cwd()
 
@@ -64,6 +64,7 @@ if options._.indexOf('watch') != -1
         '--basePath', process.cwd()
     ],{
         cwd: __dirname
+        stdio: 'inherit'
     }
 
 
@@ -136,9 +137,9 @@ if options._.indexOf('install') != -1
     , version
         
 
-if proc
-    proc.stdout.on 'data', (data)->
-        console.log data.toString()
+#if proc
+    #proc.stdout.on 'data', (data)->
+        #gutil.log data.toString()
 
-    proc.stderr.on 'data', (data)->
-        console.log data.toString()
+    #proc.stderr.on 'data', (data)->
+        #console.log data.toString()
