@@ -60,11 +60,11 @@ buildTpl = (file, enc, done)->
 
     tplFile = path.join config.tpl.output, tplFileName
 
-    #fs.writeFileSync tplFile, soure, 'utf8'
+    fs.writeFileSync tplFile, soure, 'utf8'
 
     packData = pack.reg tplPack, tplFile
 
-    writeFile tplFile, soure
+    #writeFile tplFile, soure
 
     #console.log "build tpl pack: #{tplPack} [success]"
 

@@ -62,7 +62,8 @@ gulp.task 'watch', ['buildTpl', 'webpack'], (done)->
         webpack cfg.webpackConfig, (err, stats)->
             throw new gutil.PluginError 'webpack', err if err
 
-            gutil.log '[webpack]', stats.toString()
+            gutil.log '[webpack]', stats.toString
+                colors: true
 
 
     

@@ -64,8 +64,8 @@ buildTpl = function(file, enc, done) {
   chunkhash = util.md5(soure).substring(0, config.hashLen);
   tplFileName = config.tpl.filename.replace(/\[name\]/g, tplName).replace(/\[chunkhash\]/g, chunkhash);
   tplFile = path.join(config.tpl.output, tplFileName);
+  fs.writeFileSync(tplFile, soure, 'utf8');
   packData = pack.reg(tplPack, tplFile);
-  writeFile(tplFile, soure);
   return done(null, file);
 };
 
