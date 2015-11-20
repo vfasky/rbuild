@@ -28,7 +28,7 @@ if (options.version || options.v) {
   process.exit(1);
 }
 
-if (options.indexOf('init') !== -1) {
+if (options._.indexOf('init') !== -1) {
   devConfig = fs.readFileSync(path.join(__dirname, '../tpl/rbuild.config.js'), 'utf8');
   outFile = path.join(process.cwd(), 'rbuild.config.js');
   fs.writeFileSync(outFile, devConfig, 'utf8');

@@ -25,7 +25,7 @@ if options.version or options.v
 
 
 # init
-if options.indexOf('init') != -1
+if options._.indexOf('init') != -1
     devConfig = fs.readFileSync(
         path.join(__dirname, '../tpl/rbuild.config.js'),
         'utf8'
