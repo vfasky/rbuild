@@ -54,16 +54,40 @@ gulp.task 'buildTpl', ->
 
 
 gulp.task 'watch', ['buildTpl', 'webpack'], (done)->
+    browserSync =
+        reload: ->
+        stream: ->
+
+    if options.server
+        port = Number(options.p != 'undefined' and options.p or 8080)
+
+        browserSync = require('browser-sync').create()
+        browserSync.init
+            port: port
+            server:
+                baseDir: options.basePath
+
+        gutil.log '[webpack-dev-server]', "http://0.0.0.0:#{port}"
+
+        watch path.join(cfg.tpl.output, '*.js'), ->
+            browserSync.reload()
+        
     watch cfg.tpl.watchFile, ->
         gulp.src cfg.tpl.watchFile
             .pipe buildTpl()
 
+    
     watch cfg.webpackConfig.watchFile, ->
         webpack cfg.webpackConfig, (err, stats)->
             throw new gutil.PluginError 'webpack', err if err
 
             gutil.log '[webpack]', stats.toString
                 colors: true
+
+            browserSync.reload()
+
+        
+
 
 
     

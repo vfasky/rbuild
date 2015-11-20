@@ -66,6 +66,25 @@ gulp.task('buildTpl', function() {
 });
 
 gulp.task('watch', ['buildTpl', 'webpack'], function(done) {
+  var browserSync, port;
+  browserSync = {
+    reload: function() {},
+    stream: function() {}
+  };
+  if (options.server) {
+    port = Number(options.p !== 'undefined' && options.p || 8080);
+    browserSync = require('browser-sync').create();
+    browserSync.init({
+      port: port,
+      server: {
+        baseDir: options.basePath
+      }
+    });
+    gutil.log('[webpack-dev-server]', "http://0.0.0.0:" + port);
+    watch(path.join(cfg.tpl.output, '*.js'), function() {
+      return browserSync.reload();
+    });
+  }
   watch(cfg.tpl.watchFile, function() {
     return gulp.src(cfg.tpl.watchFile).pipe(buildTpl());
   });
@@ -74,9 +93,10 @@ gulp.task('watch', ['buildTpl', 'webpack'], function(done) {
       if (err) {
         throw new gutil.PluginError('webpack', err);
       }
-      return gutil.log('[webpack]', stats.toString({
+      gutil.log('[webpack]', stats.toString({
         colors: true
       }));
+      return browserSync.reload();
     });
   });
 });

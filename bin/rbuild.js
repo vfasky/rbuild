@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 "use strict";
 var _, argv, config, deployConfig, devConfig, fs, gitignore, gulpSh, gutil, options, outFile, pack, packData, packInfo, packName, packNames, packUrl, path, proc, sfile, spawn, t, version,
   indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
@@ -39,7 +40,7 @@ config = require('../config')(require(path.join(process.cwd(), options.config)))
 gulpSh = path.join(__dirname, '../node_modules/gulp/bin/gulp.js');
 
 if (options._.indexOf('watch') !== -1) {
-  proc = spawn(gulpSh, ['watch', '--config', options.config, '--basePath', process.cwd()], {
+  proc = spawn(gulpSh, ['watch', '--config', options.config, '--basePath', process.cwd(), '--server', options.server, '--p', options.p], {
     cwd: __dirname,
     stdio: 'inherit'
   });

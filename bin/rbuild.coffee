@@ -1,4 +1,4 @@
-#`#!/usr/bin/env node`
+#!/usr/bin/env node
 
 "use strict"
 
@@ -60,8 +60,10 @@ gulpSh = path.join __dirname, '../node_modules/gulp/bin/gulp.js'
 if options._.indexOf('watch') != -1
     proc = spawn gulpSh, [
         'watch',
-        '--config', options.config
-        '--basePath', process.cwd()
+        '--config', options.config,
+        '--basePath', process.cwd(),
+        '--server', options.server,
+        '--p', options.p,
     ],{
         cwd: __dirname
         stdio: 'inherit'
