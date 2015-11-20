@@ -58,7 +58,7 @@ gulp.task 'watch', ['buildTpl', 'webpack'], (done)->
         reload: ->
         stream: ->
 
-    if options.server
+    if options.server != 'undefined'
         port = Number(options.p != 'undefined' and options.p or 8080)
 
         browserSync = require('browser-sync').create()

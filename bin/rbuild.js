@@ -1,7 +1,6 @@
 #!/usr/bin/env node
-
 "use strict";
-var _, argv, config, deployConfig, devConfig, fs, gitignore, gulpSh, gutil, options, outFile, pack, packData, packInfo, packName, packNames, packUrl, path, proc, sfile, spawn, t, version,
+var _, argv, config, deployConfig, devConfig, fs, gitignore, gulpSh, gutil, options, outFile, pack, packData, packFile, packInfo, packName, packNames, packUrl, packages, path, proc, sfile, spawn, t, version,
   indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
 _ = require('lodash');
@@ -22,7 +21,14 @@ options = _.extend({
   config: 'rbuild.config.js'
 }, argv);
 
-if (options._.indexOf('init') !== -1) {
+if (options.version || options.v) {
+  packFile = path.join(__dirname, '../package.json');
+  packages = JSON.parse(fs.readFileSync(packFile, 'utf8'));
+  console.log(packages.version);
+  process.exit(1);
+}
+
+if (options.indexOf('init') !== -1) {
   devConfig = fs.readFileSync(path.join(__dirname, '../tpl/rbuild.config.js'), 'utf8');
   outFile = path.join(process.cwd(), 'rbuild.config.js');
   fs.writeFileSync(outFile, devConfig, 'utf8');

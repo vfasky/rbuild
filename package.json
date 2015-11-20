@@ -1,6 +1,6 @@
 {
   "name": "node-rbuild",
-  "version": "1.0.7",
+  "version": "1.0.9",
   "description": "build tool",
   "repository": {
     "type": "git",

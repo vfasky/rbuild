@@ -15,8 +15,17 @@ options = _.extend
     config: 'rbuild.config.js'
 , argv
 
+# version
+if options.version or options.v
+    packFile = path.join __dirname, '../package.json'
+    packages = JSON.parse fs.readFileSync packFile, 'utf8'
+    console.log packages.version
+
+    process.exit(1)
+
+
 # init
-if options._.indexOf('init') != -1
+if options.indexOf('init') != -1
     devConfig = fs.readFileSync(
         path.join(__dirname, '../tpl/rbuild.config.js'),
         'utf8'
