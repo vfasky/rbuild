@@ -72,8 +72,9 @@ gulp.task 'watch', ['buildTpl', 'webpack'], (done)->
         watch path.join(cfg.tpl.output, '*.js'), ->
             browserSync.reload()
         
-    watch cfg.tpl.watchFile, ->
-        gulp.src cfg.tpl.watchFile
+    watch cfg.tpl.watchFile, (file)->
+        console.log 'change tpl: %s', file.path
+        gulp.src file.path
             .pipe buildTpl()
 
     

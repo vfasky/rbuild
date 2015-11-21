@@ -85,8 +85,9 @@ gulp.task('watch', ['buildTpl', 'webpack'], function(done) {
       return browserSync.reload();
     });
   }
-  watch(cfg.tpl.watchFile, function() {
-    return gulp.src(cfg.tpl.watchFile).pipe(buildTpl());
+  watch(cfg.tpl.watchFile, function(file) {
+    console.log('change tpl: %s', file.path);
+    return gulp.src(file.path).pipe(buildTpl());
   });
   return watch(cfg.webpackConfig.watchFile, function() {
     return webpack(cfg.webpackConfig, function(err, stats) {
