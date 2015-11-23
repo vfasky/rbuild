@@ -70,18 +70,20 @@ exports._writeConfig = (data)->
 
 
 exports.reg = (pack, filePath)->
+
     
     packMapFile = config.packMapFile
     
     data = exports.getData()
-    if filePath.indexOf('//') != 0 and filePath.indexOf('http') != 0
-        data[pack] = path.relative config.basePath, filePath
-    else
-        data[pack] = filePath
+    if path.extname(filePath) == '.js'
+        if filePath.indexOf('//') != 0 and filePath.indexOf('http') != 0
+            data[pack] = path.relative config.basePath, filePath
+        else
+            data[pack] = filePath
 
-    fs.writeFileSync packMapFile, JSON.stringify(data, null, 4), 'utf8'
+        fs.writeFileSync packMapFile, JSON.stringify(data, null, 4), 'utf8'
 
-    exports.writeConfig data
+        exports.writeConfig data
     
     data
 

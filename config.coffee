@@ -85,8 +85,15 @@ config = (config)->
             packs = Object.keys packMap
 
             packs.forEach (name)->
-                filePath = path.join _config.webpackConfig.output.path, packMap[name]
-                pack.reg name, filePath
+                packName = packMap[name]
+                if _.isString packName
+                    filePath = path.join _config.webpackConfig.output.path, packName
+                    pack.reg name, filePath
+                else
+                    packName.forEach (name)->
+                        filePath = path.join _config.webpackConfig.output.path, name
+                        pack.reg name, filePath
+
 
     # 缓存文件路径
     _config.dataPath = path.join _config.basePath, _config.dataDir

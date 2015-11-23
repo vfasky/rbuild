@@ -69,9 +69,17 @@ config = function(config) {
       packMap = stats.toJson().assetsByChunkName;
       packs = Object.keys(packMap);
       return packs.forEach(function(name) {
-        var filePath;
-        filePath = path.join(_config.webpackConfig.output.path, packMap[name]);
-        return pack.reg(name, filePath);
+        var filePath, packName;
+        packName = packMap[name];
+        if (_.isString(packName)) {
+          filePath = path.join(_config.webpackConfig.output.path, packName);
+          return pack.reg(name, filePath);
+        } else {
+          return packName.forEach(function(name) {
+            filePath = path.join(_config.webpackConfig.output.path, name);
+            return pack.reg(name, filePath);
+          });
+        }
       });
     });
   });
