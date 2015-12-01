@@ -67,17 +67,16 @@ gulpSh = path.join __dirname, '../node_modules/gulp/bin/gulp.js'
 
 # 监听文件更改
 if options._.indexOf('watch') != -1
+    args = options
+    args.cwd = __dirname
+    args.stdio = 'inherit'
     proc = spawn gulpSh, [
         'watch',
         '--config', options.config,
         '--basePath', process.cwd(),
         '--server', options.server,
         '--p', options.p,
-    ],{
-        cwd: __dirname
-        stdio: 'inherit'
-    }
-
+    ], args
 
 # 更新cdnjs包
 if options._.indexOf('updatePack') != -1

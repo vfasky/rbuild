@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 "use strict";
-var _, argv, config, deployConfig, devConfig, fs, gitignore, gulpSh, gutil, options, outFile, pack, packData, packFile, packInfo, packName, packNames, packUrl, packages, path, proc, sfile, spawn, t, version,
+var _, args, argv, config, deployConfig, devConfig, fs, gitignore, gulpSh, gutil, options, outFile, pack, packData, packFile, packInfo, packName, packNames, packUrl, packages, path, proc, sfile, spawn, t, version,
   indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
 _ = require('lodash');
@@ -46,10 +46,10 @@ config = require('../config')(require(path.join(process.cwd(), options.config)))
 gulpSh = path.join(__dirname, '../node_modules/gulp/bin/gulp.js');
 
 if (options._.indexOf('watch') !== -1) {
-  proc = spawn(gulpSh, ['watch', '--config', options.config, '--basePath', process.cwd(), '--server', options.server, '--p', options.p], {
-    cwd: __dirname,
-    stdio: 'inherit'
-  });
+  args = options;
+  args.cwd = __dirname;
+  args.stdio = 'inherit';
+  proc = spawn(gulpSh, ['watch', '--config', options.config, '--basePath', process.cwd(), '--server', options.server, '--p', options.p], args);
 }
 
 if (options._.indexOf('updatePack') !== -1) {
