@@ -13,6 +13,10 @@ module.exports = {
   vendor: {
     output: path.join(__dirname, 'js/vendor')
   },
+  // google 字体下载路径
+  GFonts: {
+    output: path.join(__dirname, 'style/gfonts')
+  },
   // requirejs config
   requirejsConfig: {
     paths: {

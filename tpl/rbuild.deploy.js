@@ -1,7 +1,7 @@
 // rbuild deploy config
 
 var config = require('./rbuild.config');
-var webpack = require('#{webpackPath}');
+//var webpack = require('webpack');
 
 // min js
 config.webpackConfig.plugins = config.webpackConfig.plugins || [];

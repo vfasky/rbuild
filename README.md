@@ -27,6 +27,13 @@ rbuild install jquery@2.1.4
 rbuild install jquery --download
 ```
 
+
+#### download google fonts
+
+```bash
+rbuild downGFonts http://fonts.googleapis.com/css\?family\=Roboto:100normal,100italic,300normal,300italic,400normal,400italic,500normal,500italic,700normal,700italic,900normal,900italic\|Roboto+Condensed:400normal
+```
+
 #### watch file auto build
 ```
 rbuild watch

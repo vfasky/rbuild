@@ -1,6 +1,7 @@
 #!/usr/bin/env node
+
 "use strict";
-var _, args, argv, config, deployConfig, devConfig, fs, gitignore, gulpSh, gutil, options, outFile, pack, packData, packFile, packInfo, packName, packNames, packUrl, packages, path, proc, sfile, spawn, t, version,
+var _, args, argv, config, deployConfig, devConfig, downGFonts, fs, gitignore, gulpSh, gutil, options, outFile, pack, packData, packFile, packInfo, packName, packNames, packUrl, packages, path, proc, sfile, spawn, t, url, version,
   indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
 _ = require('lodash');
@@ -20,6 +21,8 @@ process.env.INIT_CWD = process.cwd();
 options = _.extend({
   config: 'rbuild.config.js'
 }, argv);
+
+global.webpack = require('webpack');
 
 if (options.version || options.v) {
   packFile = path.join(__dirname, '../package.json');
@@ -118,4 +121,10 @@ if (options._.indexOf('install') !== -1) {
       return console.log(packName + " install success");
     }
   }, version);
+}
+
+if (options._.indexOf('downGFonts') !== -1) {
+  url = options._[1];
+  downGFonts = require('../downGFonts');
+  downGFonts(url, config);
 }

@@ -15,6 +15,9 @@ options = _.extend
     config: 'rbuild.config.js'
 , argv
 
+# 注册webpack到全局对象上
+global.webpack = require 'webpack'
+
 # version
 if options.version or options.v
     packFile = path.join __dirname, '../package.json'
@@ -146,6 +149,13 @@ if options._.indexOf('install') != -1
                 
     , version
         
+
+# 下载google字体
+if options._.indexOf('downGFonts') != -1
+    url = options._[1]
+    downGFonts = require('../downGFonts')
+    downGFonts url, config
+
 
 #if proc
     #proc.stdout.on 'data', (data)->
